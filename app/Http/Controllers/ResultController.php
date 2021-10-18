@@ -18,13 +18,11 @@ class ResultController extends Controller
     public function index()
     {
 
-    $data['results'] = Result::groupBy('student_id')
-        ->join('')
+    $data['results'] = Result::with("students")
+        ->groupBy('student_id')
         ->selectRaw('sum(marks) as sum, student_id')
         ->orderByRaw('SUM(marks) DESC')
         ->get();
-
-        // dd($data);
 
         return view('result.index', $data);
     }

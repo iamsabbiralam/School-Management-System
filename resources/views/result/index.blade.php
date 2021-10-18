@@ -16,6 +16,7 @@
                             <thead class="bg-gray-800 text-white">
                                 <tr>
                                     <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Student ID</th>
+                                    <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Student's Class</th>
                                     <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Student Name</th>
                                     <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Total Marks</th>
                                     <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Action</th>
@@ -25,6 +26,7 @@
                                 @forelse ($results as $result)
                                     <tr>
                                         <td class="w-1/3 text-left py-3 px-4">{{ $result->student_id }}</td>
+                                        <td class="w-1/3 text-left py-3 px-4">{{ $result->students->classnames->name }}</td>
                                         <td class="w-1/3 text-left py-3 px-4">{{ $result->students->name }}</td>
                                         <td class="w-1/3 text-left py-3 px-4">{{ $result->sum }}</td>
                                         <td class="w-1/3 text-left py-3 px-4">

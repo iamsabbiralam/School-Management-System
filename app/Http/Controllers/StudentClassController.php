@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\StudentClass;
 use App\Http\Requests\StudentClassRequest;
+use App\Models\Student;
 
 class StudentClassController extends Controller
 {

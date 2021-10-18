@@ -100,4 +100,22 @@ class StudentController extends Controller
     {
         //
     }
+
+    public function student() {
+
+        $data['students'] = Student::with('classnames')->groupBy('class_id')->selectRaw('count(class_id) as total, class_id')->get();
+
+        // dd($data);
+
+        return view('student.total', $data);
+    }
+
+    public function total($id) {
+
+        $data['students'] = Student::where('class_id', $id)->get();
+
+        $data['classes'] = StudentClass::where('id', $id)->first();
+
+        return view('student.classStudent', $data);
+    }
 }
