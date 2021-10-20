@@ -25,24 +25,17 @@ class MarkImport implements ToModel, WithHeadingRow, SkipsOnError, WithValidatio
     */
     public function model(array $row)
     {
-        // dd($row);
         $data = [];
         $obj = new Result();
+        $subjects = Subject::pluck( 'id', 'subjects')->toArray();
 
         foreach($row as $key => $value) {
             if ($key != 'student_id') {
-                $sub = Subject::select('id')->where('subjects', ucfirst($key))->first();
                 $data['marks'] = $value;
-                $data['subject_id'] = $sub->id;
+                $data['subject_id'] = $subjects[ucfirst($key)];
                 $data['student_id'] = $row['student_id'];
-                // dd($data);
                 $obj = new Result($data);
                 $obj->save();
-                // print"<pre>";
-                // print_r($obj);
-                // print"</pre>";
-                // die();
-
             }
         }
         return $obj;
