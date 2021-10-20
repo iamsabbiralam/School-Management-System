@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Imports\StudentsImport;
-use App\Http\Requests\StudentImportRequest;
-use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\MarkImport;
+use Illuminate\Http\Request;
 
-class StudentImportController extends Controller
+class MarkImportController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,25 +24,25 @@ class StudentImportController extends Controller
      */
     public function create()
     {
-        return view('student.import');
+        return view('result.import');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  App\Http\Requests\StudentImportRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StudentImportRequest $request)
+    public function store(Request $request)
     {
-        $file = $request->file('file')->store('import');
+        $file = $request->file('file');
 
-        $import = new StudentsImport;
+        $import = new MarkImport();
         $import->import($file);
 
-        if($import->failures()->isNotEmpty()) {
-            return back()->withFailures($import->failures());
-        }
+        //  if($import->failures()->isNotEmpty()) {
+        //     return back()->withFailures($import->failures());
+        // }
 
         return back()->with("SUCCESS", __('Excel file imported successfully'));
     }
@@ -77,7 +76,7 @@ class StudentImportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StudentImportRequest $request, $id)
+    public function update(Request $request, $id)
     {
         //
     }

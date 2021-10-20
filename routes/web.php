@@ -6,6 +6,7 @@ use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\StudentClassController;
 use App\Http\Controllers\StudentImportController;
+use App\Http\Controllers\MarkImportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +30,4 @@ Route::get('totalstudent/{id}', [StudentController::class, 'total'])->name('stud
 Route::resource('results', ResultController::class);
 Route::resource('classes', StudentClassController::class);
 Route::resource('imports', StudentImportController::class);
+Route::resource('markimports', MarkImportController::class);
