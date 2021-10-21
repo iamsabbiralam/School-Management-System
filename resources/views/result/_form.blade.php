@@ -40,7 +40,8 @@ jQuery(document).ready(function() {
         var classID = jQuery(this).val();
         if (classID) {
             jQuery.ajax({
-                url: '/getclassid/' + classID,
+                // url: '/getclassid/' + classID,
+                url: "<?php echo env('APP_URL'); ?>/getclassid/" + classID,
                 type: "GET",
                 dataType: "json",
                 success: function(data) {

@@ -28,7 +28,7 @@ Route::resource('students', StudentController::class);
 Route::get('total', [StudentController::class, 'student'])->name('student.total');
 Route::get('totalstudent/{id}', [StudentController::class, 'total'])->name('student.totalclass');
 Route::resource('results', ResultController::class);
-Route::get('getclassid/{id}',[ResultController::class, 'getclassid']);
+Route::get('getclassid/{id}',[ResultController::class, 'getClassId']);
 Route::resource('classes', StudentClassController::class);
 Route::resource('imports', StudentImportController::class);
 Route::resource('markimports', MarkImportController::class);
