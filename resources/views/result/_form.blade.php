@@ -1,13 +1,21 @@
 <div class="">
-    <label class="block text-sm text-gray-600" for="student_id">Student Name</label>
-    <select class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" name="student_id" id="student_id">
-        <option value="">Select Student</option>
-        @foreach ($students as $id => $value)
+    <label class="block text-sm text-gray-600" for="student_id">Class</label>
+    <select class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" name="id" id="id">
+        <option value="">Select Class</option>
+        @foreach ($classes as $id => $value)
             <option value="{{ $id }}">{{ $value }}</option>
         @endforeach
     </select>
 </div>
-<p class="text-red-600">{{ $errors->first('student_id') }}</p>
+<p class="text-red-600">{{ $errors->first('id') }}</p>
+<br>
+<div class="">
+    <label class="block text-sm text-gray-600" for="student_id">Student Name</label>
+    <select class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" name="class_id" id="class_id">
+        <option value="">Select Students</option>
+    </select>
+</div>
+<p class="text-red-600">{{ $errors->first('id') }}</p>
 <br>
 <div class="flex flex-wrap -mx-3 mb-6">
     @foreach ($results as $id => $value)
@@ -25,3 +33,31 @@
 <div class="mt-6">
     <button class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded" type="submit">Submit</button>
 </div>
+
+<script type="text/javascript">
+jQuery(document).ready(function() {
+    jQuery('select[name="id"]').on('change', function() {
+        var classID = jQuery(this).val();
+        if (classID) {
+            jQuery.ajax({
+                url: '/getclassid/' + classID,
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+                    console.log(data);
+                    jQuery('select[name="class_id"]').empty();
+                    jQuery('select[name="class_id"]').append(
+                        '<option>Select Students</option>');
+                    jQuery.each(data, function(key, value) {
+                        $('select[name="class_id"]').append('<option value="' + key +
+                            '">' + value + '</option>');
+                    });
+                }
+            });
+        } else {
+            $('select[name="class_id"]').empty();
+            $('select[name="class_id"]').append('<option>No Students Found</option>');
+        }
+    });
+});
+</script>

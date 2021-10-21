@@ -36,7 +36,7 @@ class StudentImportController extends Controller
      */
     public function store(StudentImportRequest $request)
     {
-        $file = $request->file('file')->store('import');
+        $file = $request->file('file');
 
         $import = new StudentsImport;
         $import->import($file);

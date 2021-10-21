@@ -35,6 +35,10 @@ class MarkImportController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'file' => 'required'
+        ]);
+
         $file = $request->file('file');
 
         $import = new MarkImport();

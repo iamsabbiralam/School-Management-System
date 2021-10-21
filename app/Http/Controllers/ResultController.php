@@ -6,6 +6,7 @@ use App\Models\Result;
 use App\Models\Student;
 use App\Models\Subject;
 use App\Http\Requests\ResultRequest;
+use App\Models\StudentClass;
 use Symfony\Component\Console\Input\Input;
 
 class ResultController extends Controller
@@ -36,6 +37,7 @@ class ResultController extends Controller
     {
         $data['students'] = Student::pluck('name', 'id');
         $data['results'] = Subject::pluck('subjects', 'id');
+        $data['classes'] = StudentClass::pluck('name', 'id');
 
         return view('result.create', $data);
     }
@@ -113,5 +115,14 @@ class ResultController extends Controller
     public function destroy(Result $result)
     {
         //
+    }
+
+    public function getclassid($id) {
+
+        $studentClass = Student::where('class_id', $id)->pluck('name','id');
+        // dd($studentClass);
+
+        // return json_encode($studentClass);
+        return response()->json($studentClass);
     }
 }
