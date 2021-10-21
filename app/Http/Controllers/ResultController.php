@@ -59,9 +59,6 @@ class ResultController extends Controller
             return redirect()->back()->withInput()->with("ERROR", __("Subject already exist"));
         }
         for ($i = 0; $i < count($request->except('_token')); $i++) {
-            // print"<pre>";
-            // print_r($i);
-            // print"</pre>";
         $data = Result::create([
             'subject_id' => $request->subject_id[$i],
             'marks' => $request->marks[$i],
@@ -121,7 +118,7 @@ class ResultController extends Controller
         //
     }
 
-    public function getclassid($id) {
+    public function getClassId($id) {
 
         $studentClass = Student::where('class_id', $id)->pluck('name','id');
         // dd($studentClass);
