@@ -13,8 +13,15 @@ class AddClassIdToResultsTables extends Migration
      */
     public function up()
     {
-        Schema::table('results_tables', function (Blueprint $table) {
-            //
+        Schema::table('results', function (Blueprint $table) {
+            $table->unsignedBigInteger('class_id')
+            ->nullable();
+
+            $table->foreign('class_id')
+            ->references('id')
+            ->on('student_classes')
+            ->onDelete('restrict')
+            ->onUpdate('restrict');
         });
     }
 
@@ -25,8 +32,9 @@ class AddClassIdToResultsTables extends Migration
      */
     public function down()
     {
-        Schema::table('results_tables', function (Blueprint $table) {
-            //
+        Schema::table('results', function (Blueprint $table) {
+            $table->dropForeign('results_class_id_foreign');
+            $table->dropColumn('class_id');
         });
     }
 }

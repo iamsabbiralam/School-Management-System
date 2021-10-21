@@ -36,6 +36,10 @@ class ResultRequest extends FormRequest
             'marks.*' => [
                 'required',
             ],
+
+            'class_id' => [
+                'required',
+            ]
         ];
     }
 
@@ -43,6 +47,7 @@ class ResultRequest extends FormRequest
 
         return [
             'student_id.required' => "Student should be selected.",
+            'class_id.required' => "Class should be selected.",
             'marks.*.required' => "Marks field should be required.",
         ];
     }

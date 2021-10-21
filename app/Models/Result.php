@@ -13,6 +13,7 @@ class Result extends Model
         'student_id',
         'subject_id',
         'marks',
+        'class_id',
     ];
 
     public function students() {
@@ -23,5 +24,10 @@ class Result extends Model
     public function subjects() {
 
         return $this->belongsTo(Subject::class, "subject_id");
+    }
+
+    public function classesname() {
+
+        return $this->belongsTo(StudentClass::class, "class_id");
     }
 }

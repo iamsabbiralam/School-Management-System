@@ -50,7 +50,7 @@ class ResultController extends Controller
      */
     public function store(ResultRequest $request)
     {
-        // dd($request);
+        // dd($request->all());
         $subject = Result::where('student_id', $request->student_id)
                     ->where('subject_id', $request->subject_id)
                     ->first();
@@ -58,13 +58,17 @@ class ResultController extends Controller
         if($subject) {
             return redirect()->back()->withInput()->with("ERROR", __("Subject already exist"));
         }
-
-        for ($i = 0; $i < count($request->all()); $i++) {
+        for ($i = 0; $i < count($request->except('_token')); $i++) {
+            // print"<pre>";
+            // print_r($i);
+            // print"</pre>";
         $data = Result::create([
-            'student_id' => $request->student_id,
             'subject_id' => $request->subject_id[$i],
             'marks' => $request->marks[$i],
+            'student_id' => $request->student_id,
+            'class_id' => $request->class_id,
         ]);
+        // dd($data);
     }
         if(empty($data)) {
             return redirect()->back()->withInput()->with("ERROR", __("Failed to Input"));
